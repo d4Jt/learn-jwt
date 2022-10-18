@@ -34,5 +34,4 @@ let deleteUser = idInput => {
 	});
 };
 
-
 module.exports = { getAllUsers, deleteUser };

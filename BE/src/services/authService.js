@@ -121,8 +121,10 @@ let requireRefreshToken = (req, res) => {
 					});
 				}
 
-				// lọc
-				refreshTokenArr = refreshTokenArr.filter(token => token !== refreshToken)
+				// lọc token cũ ra khỏi mảng
+				refreshTokenArr = refreshTokenArr.filter(
+					token => token !== refreshToken
+				);
 				// create new access token and refresh token
 				const newRefreshToken = generateRefreshToken(user);
 				const newAccessToken = generateAccessToken(user);
@@ -146,14 +148,16 @@ let logoutUser = (req, res) => {
 	return new Promise((resolve, reject) => {
 		try {
 			res.clearCookie('refreshToken');
-			refreshTokenArr =refreshTokenArr.filter(token => token !== req.cookies.refreshToken);
+			refreshTokenArr = refreshTokenArr.filter(
+				token => token !== req.cookies.refreshToken
+			);
 			resolve({
 				msg: 'Logout successfully!!!',
 			});
 		} catch (e) {
 			reject(e);
 		}
-	})
+	});
 };
 
 module.exports = { registerUser, loginUser, requireRefreshToken, logoutUser };
